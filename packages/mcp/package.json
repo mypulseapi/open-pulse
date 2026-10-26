@@ -1,6 +1,6 @@
 {
   "name": "@thepulseapi/mcp",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "MCP server for PULSE: search the developer documentation, and ask the Decision API which products meet a shopper's requirements.",
   "license": "MIT",
   "type": "module",

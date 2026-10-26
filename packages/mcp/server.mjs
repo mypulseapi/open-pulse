@@ -112,7 +112,7 @@ const index = await load();
 const rank = makeRanker(index.chunks);
 const pageUrls = [...new Set(index.chunks.map((c) => c.u))].sort();
 
-const mcp = new McpServer({ name: "pulse", version: "0.2.0" });
+const mcp = new McpServer({ name: "pulse", version: "0.2.1" });
 
 mcp.registerTool(
   "search_docs",

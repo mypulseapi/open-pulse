@@ -53,11 +53,72 @@ call underneath is domain-free.
 
 How this relates to typed-decision models such as TypeSafe AI's Jev: [docs/jev-and-open-pulse.md](docs/jev-and-open-pulse.md).
 
+## Decision evidence
+
+Commerce has plenty of product data and very little decision data. A catalogue knows the title,
+brand, price and colour. A buyer is asking whether the sofa fits through the door, whether the
+charger works with their laptop, and what is in the box. Those are **decision requirements**, and
+answering them takes evidence, not more fields.
+
+```text
+Requirement        what needs to be known
+    ↓
+Product evidence   the facts recorded, and where each came from
+    ↓
+Visible evidence   what a shopper or an agent can actually see
+    ↓
+Decision           whether the evidence is enough
+    ↓
+Outcome            what happened afterwards
+```
+
+A product can have data and still have an evidence problem: a fact in the supplier feed that never
+reaches the page, a specification stated twice with two values, a photograph that hides the feature
+that matters. On our own 2,176-product demonstration catalogue, 52.6% of recorded values repeat
+what the photograph already shows ([the research](https://thepulseapi.com/en/research)).
+
+**Abstention is a feature.** If the package size is not recorded, an agent should not infer from
+the assembled width that a sofa fits through a door. `/decide` reports each requirement as
+`meets`, `fails`, `unknown` or `conflicting`, and the option as `fits`, `fails` or `cannot_tell`.
+
+**Generate presentation. Never generate an unverified product fact.** AI can restructure, summarise
+and explain verified evidence. It must not invent dimensions, materials, compatibility,
+certifications, what is in the box or warranty terms.
+
+### Planned: a shared vocabulary
+
+Not in this repository yet. Proposed as part of the shared evidence formats, and open for
+discussion in issues:
+
+| Evidence state | Meaning | | Repair | Meaning |
+| --- | --- | --- | --- | --- |
+| `MISSING` | Not recorded | | `RECORD` | Capture a missing fact |
+| `BURIED` | Exists, hard to find | | `SHOW` | Expose evidence that already exists |
+| `INVISIBLE` | Known internally, not shown where the decision is made | | `RECONCILE` | Resolve sources that disagree |
+| `UNRESOLVED` | Some information, not enough to answer | | `GENERATE` | Present verified evidence better |
+| `CONFLICTING` | Sources disagree | | `ASK` | Request it from the merchant, supplier or buyer |
+| `NOT_OBSERVABLE` | The evidence cannot answer it | | `COMPUTE` | Derive it safely from verified inputs |
+| | | | `ABSTAIN` | Do not answer without evidence |
+| | | | `DONT_FIX` | Accept that a gap is not worth fixing |
+
+The last two repairs matter most: a trustworthy system can say "I don't know", and a sensible one
+can say "this is not worth fixing".
+
+## Open and paid
+
+**Open Pulse describes the evidence. PULSE decides what is worth doing about it.**
+
+| Open Pulse (this repository) | PULSE (the API) |
+| --- | --- |
+| Browser SDK, MCP server, examples, agent guide | Decision Audit: which gap matters most |
+| Planned: requirement and evidence formats, the vocabulary above, category packs, validators, connectors | Repair prioritisation, Decision Verification, Decision Monitor |
+| | Return Verification, Promotion Audit, the Decision API in production, learning from outcomes |
+
 ## What is here
 
 | Package | What it is | Status |
 | --- | --- | --- |
-| [`@thepulseapi/mcp`](packages/mcp) | MCP server: agents call `resolve_products` for verdicts, and search the PULSE docs | [npm 0.2.0](https://www.npmjs.com/package/@thepulseapi/mcp) |
+| [`@thepulseapi/mcp`](packages/mcp) | MCP server: agents call `resolve_products` for verdicts, and search the PULSE docs | [npm](https://www.npmjs.com/package/@thepulseapi/mcp) |
 | [`@thepulseapi/sdk`](packages/sdk) | Browser SDK for storefronts: signals, live ranking, exposure. About 3 KB gzipped, no runtime dependencies | [npm 0.2.0](https://www.npmjs.com/package/@thepulseapi/sdk) |
 | [`examples/`](examples) | Runnable examples for developers and for AI agents | |
 | [`AGENTS.md`](AGENTS.md) | How an AI agent should call PULSE and answer from it | |
@@ -129,19 +190,41 @@ That output was produced by PULSE's decision code on this input.
 - **Do not use it to decide about people.** Hiring, lending and similar decisions about individuals
   need safeguards this call does not provide.
 
-## Todo
+## Roadmap
+
+Released items are in this repository today. Everything else is planned; none of it has a date.
 
 - [x] `/decide` and the MCP tool, domain-free
 - [x] Browser SDK on npm and the CDN
+- [ ] Shared formats for requirements, evidence and outcomes, with the evidence states and repairs above
+- [ ] Category packs: the requirements that matter per kind of product, and the evidence each needs
+- [ ] Validators for malformed, contradictory or incomplete evidence
+- [ ] Connectors for commerce platforms, PIMs and feeds
 - [ ] A remote MCP endpoint, for ChatGPT and other clients that cannot run a local server
 - [ ] A query parser that turns plain requests into requirements, beyond budgets
 - [ ] Free-text fact reading beyond laptops, declared per category
-- [ ] Shared formats for requirements, evidence and outcomes
+
+## What Open Pulse is not
+
+Not a recommendation engine, a product description generator, a replacement for a PIM, a cart, a
+payment protocol or a marketplace. Not a promise that every missing field matters, and not a system
+that answers when the evidence is not enough. More product data is not automatically better product
+data.
 
 ## Contributing
 
-Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) first; contributions
-are accepted under the [Contributor License Agreement](CLA.md).
+You do not need to work on machine learning to contribute. Useful contributions include a real
+buying requirement a category is missing, a connector, examples, better agent tooling, clearer
+docs, and a report that a model is wrong: "this is not how buyers choose this product" is a good
+issue.
+
+**Domain experts are contributors too.** Someone who knows furniture, electronics, beauty or
+industrial parts may know the evidence a decision needs better than the people writing the code.
+**AI agents can propose, with review:** an agent that meets a requirement no model covers can
+propose it, and people review it before anything changes.
+
+Open an issue first, and read [CONTRIBUTING.md](CONTRIBUTING.md); contributions are accepted under
+the [Contributor License Agreement](CLA.md).
 
 ## Links
 
