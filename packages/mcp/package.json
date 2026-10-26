@@ -1,0 +1,43 @@
+{
+  "name": "@thepulseapi/mcp",
+  "version": "0.2.0",
+  "description": "MCP server for PULSE: search the developer documentation, and ask the Decision API which products meet a shopper's requirements.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "pulse-mcp": "./server.mjs"
+  },
+  "files": [
+    "server.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "zod": "^4.6.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mypulseapi/pulse.git",
+    "directory": "packages/mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/mypulseapi/pulse/issues"
+  },
+  "homepage": "https://developer.thepulseapi.com/mcp",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ecommerce",
+    "ai-agents",
+    "claude",
+    "chatgpt",
+    "pulse"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

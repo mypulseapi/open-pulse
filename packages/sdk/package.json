@@ -1,0 +1,70 @@
+{
+  "name": "@thepulseapi/sdk",
+  "version": "0.2.0",
+  "description": "Browser SDK for PULSE: rank your e-commerce catalogue for each shopper, explain every score, and favour purchases that stay bought. 3.2 KB, no dependencies. For PULSE merchants.",
+  "keywords": [
+    "ecommerce",
+    "personalization",
+    "product-ranking",
+    "search-ranking",
+    "recommendations",
+    "merchandising",
+    "product-data",
+    "catalog",
+    "returns",
+    "conversion",
+    "shopify",
+    "woocommerce",
+    "nextjs",
+    "react",
+    "vue",
+    "persona",
+    "sdk"
+  ],
+  "license": "MIT",
+  "homepage": "https://developer.thepulseapi.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mypulseapi/pulse.git",
+    "directory": "packages/sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/mypulseapi/pulse/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/index.iife.js",
+  "jsdelivr": "./dist/index.iife.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "cdn:publish": "node scripts/publish-cdn.mjs",
+    "prepublishOnly": "node scripts/check-publishable.mjs"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.726.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  }
+}
