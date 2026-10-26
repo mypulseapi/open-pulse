@@ -5,9 +5,9 @@ repository or calling PULSE from code you write.
 
 ## What PULSE is, in one line
 
-**Shopper requirements and product evidence in, a verdict per product out: fits, fails, or cannot
-tell, with what is missing.** Plus the Promotion Audit: offers judged on orders kept after returns
-and failed deliveries, against doing nothing.
+**Requirements and evidence in, a verdict per option out: fits, fails, or cannot tell, with what is
+missing.** Any industry, any category: products, suppliers, hotels, plans. In commerce it also
+audits promotions on orders kept after returns and failed deliveries.
 
 ## Calling the API
 

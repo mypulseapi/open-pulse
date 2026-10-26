@@ -5,6 +5,7 @@ which you create in the PULSE dashboard under Integration, API keys.
 
 | Example | What it shows | Who it is for |
 | --- | --- | --- |
+| [`decide-any-domain.mjs`](decide-any-domain.mjs) | `POST /decide` outside commerce: suppliers and hotels | Any developer |
 | [`browser-sdk.html`](browser-sdk.html) | The SDK from the CDN: start a session, send signals, rank, record what was shown | Storefront developers |
 | [`decide.mjs`](decide.mjs) | `POST /decide`: which products fit, fail, or cannot be told, and why | Developers and agent builders |
 | [`promotion-audit.mjs`](promotion-audit.mjs) | `POST /interventions/audit`: which offers paid for themselves after returns | Sellers' engineers and analysts |
