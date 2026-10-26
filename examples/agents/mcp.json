@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "pulse": {
+      "command": "npx",
+      "args": ["-y", "@thepulseapi/mcp"],
+      "env": { "PULSE_API_KEY": "pk_live_..." }
+    }
+  }
+}

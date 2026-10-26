@@ -1,7 +1,7 @@
 {
-  "name": "pulse-open",
+  "name": "open-pulse",
   "private": true,
-  "description": "Open-source packages for PULSE by Resolve Labs: the browser SDK and the MCP server.",
+  "description": "Open Pulse: the open-source half of PULSE by Resolve Labs. The browser SDK, the MCP server for AI agents, and examples. MIT.",
   "license": "MIT",
   "workspaces": [
     "packages/*"

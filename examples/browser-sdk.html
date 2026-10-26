@@ -1,0 +1,51 @@
+<!doctype html>
+<!--
+  The browser SDK from the CDN, with no build step. Open this file, put in your publishable key and
+  organization id, and watch the console.
+
+  Publishable keys (pk_live_...) are designed to be visible in browser code: they can send signals
+  and read rankings, nothing else.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PULSE SDK example</title>
+    <script src="https://cdn.thepulseapi.com/sdk/v0/pulse.iife.js"></script>
+  </head>
+  <body>
+    <ul id="shelf"></ul>
+    <script type="module">
+      // The script tag puts a ready client on window as `Pulse`.
+      const pulse = window.Pulse;
+
+      // 1. Start a session. Captures device, referrer and time of day, once.
+      await pulse.init({ apiKey: "pk_live_...", organizationId: "org_..." });
+
+      // 2. Tell it what the shopper did.
+      await pulse.track([
+        { type: "category_view", value: "laptops" },
+        { type: "price_filter", value: "10000000-25000000" },
+      ]);
+
+      // 3. Rank products against the session. Send { id } alone for products already synced.
+      const { decisionId, results, heldBack } = await pulse.search([
+        { id: "sku-1", title: "ASUS Vivobook 14 16GB", price: 15990000 },
+        { id: "sku-2", title: "Dell XPS 15 32GB", price: 42990000 },
+      ]);
+
+      // A held-back session gets your own order back, unranked: never show its scores.
+      const shelf = document.getElementById("shelf");
+      results.forEach((r) => {
+        const li = document.createElement("li");
+        li.textContent = heldBack ? r.product.title : `${r.product.title} (${r.score.toFixed(2)})`;
+        shelf.append(li);
+      });
+
+      // 4. Record what was actually shown, so the ranking can be graded.
+      pulse.exposure(
+        decisionId,
+        results.map((r, i) => ({ productId: r.product.id, rank: i + 1, visible: true })),
+      );
+    </script>
+  </body>
+</html>

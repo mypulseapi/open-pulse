@@ -21,11 +21,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mypulseapi/pulse.git",
+    "url": "git+https://github.com/mypulseapi/open-pulse.git",
     "directory": "packages/mcp"
   },
   "bugs": {
-    "url": "https://github.com/mypulseapi/pulse/issues"
+    "url": "https://github.com/mypulseapi/open-pulse/issues"
   },
   "homepage": "https://developer.thepulseapi.com/mcp",
   "keywords": [
