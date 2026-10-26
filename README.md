@@ -51,6 +51,8 @@ Three things follow from that one rule:
 PULSE started in e-commerce, where it also ranks storefronts and audits promotions. The decision
 call underneath is domain-free.
 
+How this relates to typed-decision models such as TypeSafe AI's Jev: [docs/jev-and-open-pulse.md](docs/jev-and-open-pulse.md).
+
 ## What is here
 
 | Package | What it is | Status |
