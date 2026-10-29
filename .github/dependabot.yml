@@ -11,6 +11,11 @@ updates:
         dependency-type: production
       development:
         dependency-type: development
+    # Major versions change APIs and build tooling (typescript 7 and tsup 9 broke the SDK build);
+    # a maintainer upgrades those by hand.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     commit-message:
       prefix: deps
 
