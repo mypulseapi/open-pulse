@@ -21,8 +21,8 @@ Thank you for helping. A few rules keep this easy for everyone.
 
 Contributions are accepted under the [PULSE Contributor License Agreement](CLA.md). It lets Resolve
 Labs use your contribution in this MIT-licensed project and in its commercial service, while you
-keep the copyright. Agree to it once by ticking the box in the pull request template; we cannot
-merge a pull request without it.
+keep the copyright. Agree to it by ticking the box in the pull request template; we cannot
+merge a pull request without it. Members of the mypulseapi organisation do not need to.
 
 ## Development
 
