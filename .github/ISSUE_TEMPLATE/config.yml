@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://developer.thepulseapi.com
+    about: How to use the SDK, the MCP server and the Decision API.
+  - name: Report a security problem
+    url: https://github.com/mypulseapi/open-pulse/security/advisories/new
+    about: Please report security problems privately, never in a public issue.
