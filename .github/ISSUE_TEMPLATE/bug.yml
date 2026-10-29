@@ -1,0 +1,44 @@
+name: Bug report
+description: The SDK, the MCP server or an example does not do what it should.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      options:
+        - "@thepulseapi/sdk"
+        - "@thepulseapi/mcp"
+        - Examples
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: From package.json or `npm ls`.
+      placeholder: 0.2.0
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you expected, and what you got instead. Paste errors as text.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The smallest code or command that shows the problem. Leave out API keys.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Node 22 on Linux, Chrome 140, Claude Desktop
+    validations:
+      required: true
