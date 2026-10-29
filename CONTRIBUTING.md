@@ -8,6 +8,15 @@ Thank you for helping. A few rules keep this easy for everyone.
    misreads, an adapter you need. Agreeing on the change before the code saves your time.
 2. **Keep pull requests small**, one change each, with a test or a reproduction.
 
+## Branches and pull requests
+
+- Open pull requests against **`develop`**, the default branch. `main` holds what has been
+  released and only takes pull requests from `develop`.
+- A pull request into `develop` needs CI to pass on Node 20 and 22, the CLA box ticked, and a
+  review from a maintainer. Pull requests are squashed when merged.
+- Pull requests from forks run CI after a maintainer approves the run, so expect a short wait.
+- Packages are published to npm only from `main`.
+
 ## The Contributor License Agreement
 
 Contributions are accepted under the [PULSE Contributor License Agreement](CLA.md). It lets Resolve
@@ -32,4 +41,10 @@ Node 20 or later. Each package has its own README.
 
 ## Reporting a security issue
 
-Do not open a public issue. Email the team through [thepulseapi.com/contact](https://thepulseapi.com/contact).
+Do not open a public issue. Report it privately through
+[a security advisory](https://github.com/mypulseapi/open-pulse/security/advisories/new), as
+described in [SECURITY.md](SECURITY.md).
+
+## Code of conduct
+
+Everyone taking part follows the [Code of Conduct](CODE_OF_CONDUCT.md).
