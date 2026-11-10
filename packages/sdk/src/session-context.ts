@@ -1,9 +1,9 @@
-import type { GeoInfo, WeatherInfo, DeviceInfo } from "./signals"
+import type { GeoInfo, DeviceInfo } from "./signals"
 
 /**
  * The visitor's context, captured once and kept for the life of the session.
  *
- * Device, IP, location and weather are **properties of the session, not of the page**. They cannot
+ * Device, IP and location are **properties of the session, not of the page**. They cannot
  * change between one page and the next, so capturing them on every page load was work with a
  * guaranteed-identical answer: two external HTTP calls, each with a 3s timeout, on the critical
  * path before the first inference could run.
@@ -22,19 +22,7 @@ export interface SessionContext {
   capturedAt: number
   device?: DeviceInfo
   geo?: GeoInfo | null
-  weather?: WeatherInfo | null
-  /** When the weather reading was taken — it is the one field that goes stale inside a session. */
-  weatherAt?: number
 }
-
-/**
- * Weather is re-read after this long even within one session.
- *
- * Everything else here is immutable for the session — the device does not change, the IP will not
- * move — but a 30-minute session can outlast a rain shower, and `weather:rain` driving a
- * recommendation after the sun came out is the demo being confidently wrong.
- */
-export const WEATHER_TTL_MS = 10 * 60 * 1000
 
 function safeParse(raw: string | null): SessionContext | null {
   if (!raw) return null
@@ -73,11 +61,6 @@ export function writeSessionContext(sessionId: string, patch: Partial<SessionCon
   }
 }
 
-/** Is the cached weather still worth trusting? */
-export function isWeatherFresh(ctx: SessionContext | null, now = Date.now()): boolean {
-  return Boolean(ctx?.weather && ctx.weatherAt && now - ctx.weatherAt < WEATHER_TTL_MS)
-}
-
 export function clearSessionContext(): void {
   if (typeof localStorage === "undefined") return
   try {
@@ -85,28 +68,4 @@ export function clearSessionContext(): void {
   } catch {
     // ignore
   }
-}
-
-// ponytail: one runnable check, plain assertions.
-//   node --experimental-strip-types -e "import('./src/session-context.ts').then(m => m.demo())"
-export function demo(): void {
-  const now = 1_700_000_000_000
-  const fresh: SessionContext = {
-    sessionId: "s1",
-    capturedAt: now,
-    weather: { condition: "rain", description: "", temp: 30, humidity: 70 } as WeatherInfo,
-    weatherAt: now - 60_000,
-  }
-  console.assert(isWeatherFresh(fresh, now), "a one-minute-old reading is fresh")
-  console.assert(
-    !isWeatherFresh({ ...fresh, weatherAt: now - WEATHER_TTL_MS - 1 }, now),
-    "past the TTL it is stale — a 30-minute session outlasts a shower",
-  )
-  console.assert(!isWeatherFresh({ ...fresh, weather: null }, now), "no reading is never fresh")
-  console.assert(!isWeatherFresh(null, now), "no context is never fresh")
-  console.assert(
-    !isWeatherFresh({ sessionId: "s1", capturedAt: now, weather: fresh.weather }, now),
-    "a reading with no timestamp cannot be trusted — unknown age is not freshness",
-  )
-  console.log("session-context: ok")
 }

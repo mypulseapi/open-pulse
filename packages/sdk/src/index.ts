@@ -17,12 +17,10 @@ export {
   captureDeviceInfoAsync,
   captureGeoInfo,
   geoToSignals,
-  captureWeatherInfo,
-  weatherToSignals,
   captureCulturalCalendar,
   captureEnhancedReferrerSignals,
 } from "./signals"
-export type { DeviceInfo, GeoInfo, WeatherInfo } from "./signals"
+export type { DeviceInfo, GeoInfo } from "./signals"
 export type {
   PulseConfig,
   Signal,
@@ -41,12 +39,10 @@ export type {
   RankedCatalogResponse,
 } from "./types"
 
-// Session-scoped context cache: device/geo/weather are captured once per session, not per page.
+// Session-scoped context cache: device and geo are captured once per session, not per page.
 export {
   readSessionContext,
   writeSessionContext,
-  isWeatherFresh,
   clearSessionContext,
-  WEATHER_TTL_MS,
   type SessionContext,
 } from "./session-context"

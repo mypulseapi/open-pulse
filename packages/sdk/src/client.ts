@@ -68,7 +68,7 @@ export class PulseClient {
       this.config.apiKey,
     );
     this.notify(res.personas, res.topPersonas);
-    this.log("track", { matched: res.matchedSignals.length, ms: res.processingTimeMs });
+    this.log("track", { matched: res.matchedSignals?.length ?? 0, ms: res.processingTimeMs });
     return res;
   }
 
@@ -264,10 +264,12 @@ export class PulseClient {
   }
 
   private notify(
-    personas: Record<string, number>,
+    personas: Record<string, number> | undefined,
     topPersonas: Array<{ slug: string; score: number }>,
   ): void {
-    this.personaCallback?.(personas ?? {}, Array.isArray(topPersonas) ? topPersonas : []);
+    const top = Array.isArray(topPersonas) ? topPersonas : [];
+    // A merchant key gets the top personas only; the full distribution is Pulse's own.
+    this.personaCallback?.(personas ?? Object.fromEntries(top.map((p) => [p.slug, p.score])), top);
   }
 
   private log(label: string, data?: unknown): void {
