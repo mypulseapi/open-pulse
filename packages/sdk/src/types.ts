@@ -69,10 +69,12 @@ export interface MatchedSignal {
 
 export interface TrackResponse {
   sessionId: string;
-  personas: Record<string, number>;
+  /** Pulse's own organizations only; a merchant key gets `topPersonas`, scores in tenths. */
+  personas?: Record<string, number>;
   topPersonas: Array<{ slug: string; score: number; name?: string }>;
   newSignals: string[];
-  matchedSignals: MatchedSignal[];
+  /** Pulse's own organizations only. */
+  matchedSignals?: MatchedSignal[];
   /**
    * The population base rate each mutually exclusive persona started from.
    *
@@ -149,6 +151,7 @@ export interface ScoreBreakdown {
 export interface SearchResult {
   product: ProductInput;
   score: number;
+  /** Pulse's own organizations only. */
   breakdown?: ScoreBreakdown;
 }
 
@@ -176,7 +179,8 @@ export interface SearchResponse {
   /** Identifies the ranking decision. Quote it back on exposures and events. */
   decisionId: string;
   results: SearchResult[];
-  personas: Record<string, number>;
+  /** Pulse's own organizations only; a merchant key gets `topPersonas`. */
+  personas?: Record<string, number>;
   topPersonas: Array<{ slug: string; score: number }>;
   processingTimeMs: number;
   totalResults: number;
@@ -225,7 +229,7 @@ export interface SessionResponse {
   found: boolean;
   session?: {
     sessionId: string;
-    personas: Record<string, number>;
+    personas?: Record<string, number>;
     topPersonas: Array<{ slug: string; score: number }>;
     signalCount: number;
     signalsReceived: string[];
@@ -248,6 +252,7 @@ export interface RankedCatalogItem {
   slug: string;
   score: number;
   /** Present when `includeBreakdown` was requested — the same shape `search()` returns. */
+  /** Pulse's own organizations only. */
   breakdown?: ScoreBreakdown;
 }
 
@@ -274,7 +279,8 @@ export interface RankedCatalogResponse {
   /** True when this session is in the control group: the catalog's own order, every score 0. */
   heldBack: boolean;
   /** The personas this ranking used, after any signals sent with the request. */
-  personas: Record<string, number>;
+  /** Pulse's own organizations only; a merchant key gets `topPersonas`. */
+  personas?: Record<string, number>;
   topPersonas: Array<{ slug: string; score: number }>;
   /** Quote this back on exposures and events so an outcome attaches to the ranking that caused it. */
   decisionId: string;
