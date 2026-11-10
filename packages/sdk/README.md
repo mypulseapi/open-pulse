@@ -431,7 +431,6 @@ import {
   captureReferrerSignal,
   captureTimeSignal,
   captureGeoInfo,
-  captureWeatherInfo,
   captureCulturalCalendar,
   parseUserAgent,
 } from "@thepulseapi/sdk";
