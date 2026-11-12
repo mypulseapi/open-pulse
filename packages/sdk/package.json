@@ -63,7 +63,7 @@
     "prepublishOnly": "node scripts/check-publishable.mjs"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.726.1",
+    "@aws-sdk/client-s3": "^3.1164.0",
     "tsup": "^9.0.0",
     "typescript": "^5.8.3"
   }
