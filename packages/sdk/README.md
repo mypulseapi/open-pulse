@@ -238,7 +238,7 @@ await pulse.track([
 // 3. Rank your products against the session.
 const { results } = await pulse.search(products);
 
-results[0].scoreBreakdown; // why this one came first
+results[0].breakdown; // why this one came first (when the key may see it)
 ```
 
 `init()` is the only call that needs a browser. Everything else is a plain HTTPS request.
