@@ -1,6 +1,6 @@
 {
   "name": "@thepulseapi/sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Browser SDK for PULSE: rank your e-commerce catalogue for each shopper, explain every score, and favour purchases that stay bought. 3.2 KB, no dependencies. For PULSE merchants.",
   "keywords": [
     "ecommerce",
