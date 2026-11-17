@@ -238,8 +238,13 @@ await pulse.track([
 // 3. Rank your products against the session.
 const { results } = await pulse.search(products);
 
-results[0].scoreBreakdown; // why this one came first
+results[0].breakdown; // why this one came first (when the key may see it)
 ```
+
+A reply the engine could not personalise in time still succeeds, and says so: `degraded: true` on
+`track()`, `search()` and `rankedCatalog()` replies means the decision core did not answer, so the
+products are in your order with every score 0 (or the session kept its personas). It is absent on every
+other reply, so older code is unaffected.
 
 `init()` is the only call that needs a browser. Everything else is a plain HTTPS request.
 
