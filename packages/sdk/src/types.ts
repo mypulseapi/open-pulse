@@ -88,6 +88,13 @@ export interface TrackResponse {
   priors?: Record<string, number>;
   confidence: number;
   processingTimeMs: number;
+  /**
+   * True when the engine's decision core did not answer in time: the session kept the personas it had and this call's signals were not applied. Absent otherwise: an engine
+   * that answered never sends it, and an older engine never does, so `undefined` means answered.
+   *
+   * Check it before reading `personas` or `topPersonas` as personalised.
+   */
+  degraded?: boolean;
 }
 
 // =============================================================================
@@ -194,6 +201,13 @@ export interface SearchResponse {
    * every product for the share of traffic the holdback assigns here.
    */
   heldBack: boolean;
+  /**
+   * True when the engine's decision core did not answer in time: the query was searched as typed and the results are in the order they came, every `score` 0. Absent otherwise: an engine
+   * that answered never sends it, and an older engine never does, so `undefined` means answered.
+   *
+   * Check it before reading `score` as personalised.
+   */
+  degraded?: boolean;
 }
 
 // =============================================================================
@@ -284,4 +298,11 @@ export interface RankedCatalogResponse {
   topPersonas: Array<{ slug: string; score: number }>;
   /** Quote this back on exposures and events so an outcome attaches to the ranking that caused it. */
   decisionId: string;
+  /**
+   * True when the engine's decision core did not answer in time: the page is in the catalogue's own order, every `score` 0. Absent otherwise: an engine
+   * that answered never sends it, and an older engine never does, so `undefined` means answered.
+   *
+   * Check it before reading `score` as personalised.
+   */
+  degraded?: boolean;
 }
