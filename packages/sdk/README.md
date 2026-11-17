@@ -146,14 +146,14 @@ No bundler, no install. This is what the WordPress, Shopify, Alpine and Laravel 
 ```html
 <script
   src="https://cdn.thepulseapi.com/sdk/v0/pulse.iife.js"
-  integrity="sha384-8o8zF5vok1TbaihZxMFcN9NxA0qVIoF5Lv9G6j3xv5g9FHMsRpbEZ3/ZJwkBdcmq"
+  integrity="sha384-Pb1L39Lbs4oq8F/sw6r3J3T/xWutns+fflQ3saWv7UjcHS/MRbNVR6KWRbt6ILC8"
   crossorigin="anonymous"
 ></script>
 ```
 
 The script tag exposes the client as the global `Pulse`, so `Pulse.init(...)` works directly.
 
-> The `integrity` hash above pins the exact bytes of **0.2.0**. If you load the floating
+> The `integrity` hash above pins the exact bytes of **0.3.0**. If you load the floating
 > `/sdk/v0/` path, which receives patches, omit `integrity` or pin the exact version instead. See
 > [Versioning and the CDN](#versioning-and-the-cdn).
 
@@ -476,7 +476,7 @@ The CDN serves two paths for every release:
 | Path | Cache | Use it when |
 | --- | --- | --- |
 | `/sdk/v0/pulse.iife.js` | 5 minutes | You want patches automatically. This is what the quick-start shows |
-| `/sdk/v0.2.0/pulse.iife.js` | 1 year, immutable | You need the bytes to never change, for example to publish an SRI hash |
+| `/sdk/v0.3.0/pulse.iife.js` | 1 year, immutable | You need the bytes to never change, for example to publish an SRI hash |
 
 The floating path is cached for only five minutes on purpose: a quick-start snippet gets copied
 once and never revisited, so a long cache there would make "you get patches" untrue.
