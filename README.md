@@ -119,7 +119,7 @@ can say "this is not worth fixing".
 | Package | What it is | Status |
 | --- | --- | --- |
 | [`@thepulseapi/mcp`](packages/mcp) | MCP server: agents call `resolve_products` for verdicts, and search the PULSE docs | [npm](https://www.npmjs.com/package/@thepulseapi/mcp) |
-| [`@thepulseapi/sdk`](packages/sdk) | Browser SDK for storefronts: signals, live ranking, exposure. About 3 KB gzipped, no runtime dependencies | [npm 0.2.0](https://www.npmjs.com/package/@thepulseapi/sdk) |
+| [`@thepulseapi/sdk`](packages/sdk) | Browser SDK for storefronts: signals, live ranking, exposure. About 3 KB gzipped, no runtime dependencies | [npm 0.3.0](https://www.npmjs.com/package/@thepulseapi/sdk) |
 | [`examples/`](examples) | Runnable examples for developers and for AI agents | |
 | [`AGENTS.md`](AGENTS.md) | How an AI agent should call PULSE and answer from it | |
 
